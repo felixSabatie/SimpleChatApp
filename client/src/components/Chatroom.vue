@@ -6,6 +6,7 @@
 
 <script>
   export default {
-    name: 'chatroom'
+    name: 'chatroom',
+    
   }
 </script>
