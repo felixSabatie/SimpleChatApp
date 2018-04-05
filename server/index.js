@@ -14,6 +14,12 @@ io.on('connection', socket => {
   socket.on('roomConnect', roomId => {
     console.log('user connected to room ' + roomId)
   })
+
+  socket.on('messageSent', message => {
+    console.log('message received : ' + message)
+    io.sockets.emit('newMessage', message)
+  })
+
 })
 
 http.listen(3000)
