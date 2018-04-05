@@ -1,9 +1,18 @@
 <template>
-  <h1>Hello world</h1>
+  <div class="main">
+    <h1>Chat app</h1>
+
+    <Chatroom></Chatroom>
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import Chatroom from './components/Chatroom'
+
+  export default {
+    name: 'App',
+    components: {
+      Chatroom
+    }
+  }
 </script>
