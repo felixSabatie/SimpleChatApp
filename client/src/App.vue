@@ -2,7 +2,7 @@
   <div class="main">
     <h1>Chat app</h1>
 
-    <Chatroom></Chatroom>
+    <Chatroom room-id="1"></Chatroom>
   </div>
 </template>
 
