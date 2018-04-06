@@ -7,10 +7,10 @@ let chatrooms = []
 let clients = []
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
 
 io.on('connection', socket => {
   console.log('user connected')
@@ -28,11 +28,11 @@ io.on('connection', socket => {
 
   socket.on('newChatroom', chatroom => {
     console.log('new chatroom : ' + chatroom.name)
-    if(!(chatroom.name in chatrooms)) {
-      chatrooms[chatroom.name] = chatroom
+    if(chatrooms.find(room => room.name === chatroom.name) == null) {
+      chatrooms.push(chatroom)
       io.sockets.emit('newChatroom', chatroom)
     } else {
-      console.log('chatroom rejected')
+      console.warn('chatroom ' + chatroom.name + ' rejected, key already exists')
     }
   })
 
@@ -48,7 +48,7 @@ io.on('connection', socket => {
 })
 
 app.get('/chatrooms', (req, res) => {
-  res.send(chatrooms)
+  res.json(chatrooms)
 })
 
 http.listen(3000)

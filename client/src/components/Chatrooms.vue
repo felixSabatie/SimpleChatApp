@@ -40,15 +40,10 @@
       ...mapGetters(['socket', 'connected', 'chatrooms'])
     },
     mounted() {
-      console.log('mounted')
       if(!this.connected) {
         this.$router.push('/login')
       }
       this.getChatroomsFromServerStore()
-
-      this.socket.on('newChatroom', chatroom => {
-        this.addChatroomStore(chatroom)
-      })
     },
     methods: {
       ...mapActions({

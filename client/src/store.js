@@ -48,9 +48,16 @@ const getters = {
   chatrooms: state => state.chatrooms
 }
 
-export default new Vuex.Store({
+let store = new Vuex.Store({
   state: state,
   getters: getters,
   actions: actions,
   mutations: mutations
 })
+
+// Socket.io events listener
+store.state.socket.on('newChatroom', chatroom => {
+  store.dispatch('addChatroom', chatroom)
+})
+
+export default store
