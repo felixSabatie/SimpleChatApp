@@ -9,21 +9,34 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: 'login',
     computed: {
-      ...mapGetters(['socket'])
+      ...mapGetters(['socket', 'connected'])
     },
     data() {
       return {
         name: ''
       }
     },
+    created() {
+      if(this.connected) {
+        this.redirectToHome()
+      }
+    },
     methods: {
+      ...mapActions(['connect']),
+
       login() {
-        this.io.emit('login', this.name)
+        this.socket.emit('login', this.name)
+        this.connect()
+        this.redirectToHome()
+      },
+
+      redirectToHome() {
+        this.$router.push('/chatrooms')
       }
     }
   }

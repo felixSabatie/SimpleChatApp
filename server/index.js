@@ -8,13 +8,20 @@ let clients = []
 
 io.on('connection', socket => {
   console.log('user connected')
+  let userName = null
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    console.log('user (' + userName + ') disconnected')
+  })
+
+  socket.on('login', name => {
+    console.log(name + ' logged in')
+    clients[name] = socket
+    userName = name
   })
 
   socket.on('roomConnect', roomId => {
-    console.log('user connected to room ' + roomId)
+    console.log(userName + ' connected to room ' + roomId)
   })
 
   socket.on('messageSent', message => {
