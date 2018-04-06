@@ -1,29 +1,42 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import IoClient from 'socket.io-client'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 const state = {
   socket: IoClient('localhost:3000'),
-  connected: false
+  connected: false,
+  chatrooms: []
 }
 
 const mutations = {
   connect(state) {
     state.connected = true
+  },
+  setChatrooms(state, chatrooms) {
+    state.chatrooms = chatrooms
   }
 }
 
 const actions = {
   connect(context) {
     context.commit('connect')
+  },
+  getChatroomsFromServer(context) {
+    axios.get('http://localhost:3000/chatrooms').then(response => {
+      context.commit('setChatrooms', response.data)
+    }, err => {
+      console.error(err)
+    })
   }
 }
 
 const getters = {
   socket: state => state.socket,
-  connected: state => state.connected
+  connected: state => state.connected,
+  chatrooms: state => state.chatrooms
 }
 
 export default new Vuex.Store({

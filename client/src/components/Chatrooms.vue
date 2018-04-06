@@ -5,17 +5,21 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: 'chatrooms',
     computed: {
-      ...mapGetters(['connected'])
+      ...mapGetters(['connected', 'chatrooms'])
     },
     created() {
       if(!this.connected) {
         this.$router.push('/login')
       }
+      this.getChatroomsFromServer()
+    },
+    methods: {
+      ...mapActions(['getChatroomsFromServer'])
     }
   }
 </script>

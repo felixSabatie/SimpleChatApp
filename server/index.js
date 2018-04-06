@@ -6,6 +6,12 @@ const io = require('socket.io')(http)
 let chatrooms = []
 let clients = []
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 io.on('connection', socket => {
   console.log('user connected')
   let userName = null
@@ -29,6 +35,10 @@ io.on('connection', socket => {
     io.sockets.emit('newMessage', message)
   })
 
+})
+
+app.get('/chatrooms', (req, res) => {
+  res.send(chatrooms)
 })
 
 http.listen(3000)
