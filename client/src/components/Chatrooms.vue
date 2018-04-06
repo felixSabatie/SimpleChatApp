@@ -1,6 +1,6 @@
 <template>
   <div class="chatrooms">
-    <h1>Chatrooms works</h1>
+    <h2>Chatrooms works</h2>
   </div>
 </template>
 
