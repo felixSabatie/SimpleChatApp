@@ -14,7 +14,8 @@
     </div>
 
     <div class="right-panel">
-
+      <Chatroom v-if="currentChatroom" :chatroom="currentChatroom"></Chatroom>
+      <div v-else class="no-chatroom">Select a chatroom on the left panel</div>
     </div>
 
   </div>
@@ -23,28 +24,44 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import ChatroomItem from './ChatroomItem'
+  import Chatroom from './Chatroom'
 
   export default {
     name: 'chatrooms',
-    components: { ChatroomItem },
+
+    components: { ChatroomItem, Chatroom },
+
     data() {
       return {
-        currentChatroom: {},
+        currentChatroom: null,
         newChatroom: {
           name: '',
-          messages: []
+          messages: [],
+          id: undefined
         }
       }
     },
+
     computed: {
       ...mapGetters(['socket', 'connected', 'chatrooms'])
     },
-    mounted() {
+
+    created() {
       if(!this.connected) {
         this.$router.push('/login')
       }
       this.getChatroomsFromServerStore()
+
+      this.setCurrentChatroom()
     },
+
+    watch: {
+      '$route' (to, from) {
+        console.log('Route changed')
+        this.setCurrentChatroom()
+      }
+    },
+
     methods: {
       ...mapActions({
         getChatroomsFromServerStore: 'getChatroomsFromServer',
@@ -54,6 +71,12 @@
       addChatroom() {
         this.emitChatroomStore(this.newChatroom)
         this.newChatroom.name = ''
+      },
+      setCurrentChatroom() {
+        let chatroomId = parseInt(this.$route.params.id)
+        if(chatroomId != null) {
+          this.currentChatroom = this.chatrooms.find(chatroom => chatroom.id === chatroomId)
+        }
       }
     }
   }

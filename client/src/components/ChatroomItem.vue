@@ -1,6 +1,6 @@
 <template>
   <div class="chatroom-item">
-    {{ chatroom.name }}
+    <router-link :to="'/chatrooms/' + chatroom.id">{{ chatroom.name }}</router-link>
   </div>
 </template>
 

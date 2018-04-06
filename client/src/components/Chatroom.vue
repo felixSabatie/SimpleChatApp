@@ -1,6 +1,6 @@
 <template>
   <div class="chatroom">
-    <h2>Room</h2>
+    <h2>{{ chatroom.name }}</h2>
     <div class="messages">
       <div class="message" v-for="message of messages">
         {{ message }}
@@ -20,7 +20,7 @@
 
   export default {
     name: 'chatroom',
-    props: ['roomId'],
+    props: ['chatroom'],
     computed: {
       ...mapGetters(['socket'])
     },
@@ -31,7 +31,7 @@
       }
     },
     created() {
-      this.socket.emit('roomConnect', this.roomId)
+      this.socket.emit('roomConnect', this.chatroom.id)
       this.socket.on('newMessage', message => {
         this.messages.push(message)
       })
