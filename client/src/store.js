@@ -17,6 +17,9 @@ const mutations = {
   },
   setChatrooms(state, chatrooms) {
     state.chatrooms = chatrooms
+  },
+  addChatroom(state, chatroom) {
+    state.chatrooms.push(chatroom)
   }
 }
 
@@ -30,6 +33,12 @@ const actions = {
     }, err => {
       console.error(err)
     })
+  },
+  emitChatroom({commit, state}, chatroom) {
+    state.socket.emit('newChatroom', chatroom)
+  },
+  addChatroom(context, chatroom) {
+    context.commit('addChatroom', chatroom)
   }
 }
 

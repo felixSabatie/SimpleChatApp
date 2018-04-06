@@ -1,25 +1,65 @@
 <template>
   <div class="chatrooms">
-    <h2>Chatrooms works</h2>
+
+    <div class="left-panel">
+      <div class="chatrooms-list">
+        <chatroom-item v-for="chatroom of chatrooms" :key="chatroom.name" :chatroom="chatroom"></chatroom-item>
+      </div>
+      <div class="form">
+        <form v-on:submit.prevent="addChatroom">
+          <input placeholder="New chatroom name" type="text" v-model="newChatroom.name">
+          <button type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="right-panel">
+
+    </div>
+
   </div>
 </template>
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import ChatroomItem from './ChatroomItem'
 
   export default {
     name: 'chatrooms',
-    computed: {
-      ...mapGetters(['connected', 'chatrooms'])
+    components: { ChatroomItem },
+    data() {
+      return {
+        currentChatroom: {},
+        newChatroom: {
+          name: '',
+          messages: []
+        }
+      }
     },
-    created() {
+    computed: {
+      ...mapGetters(['socket', 'connected', 'chatrooms'])
+    },
+    mounted() {
+      console.log('mounted')
       if(!this.connected) {
         this.$router.push('/login')
       }
-      this.getChatroomsFromServer()
+      this.getChatroomsFromServerStore()
+
+      this.socket.on('newChatroom', chatroom => {
+        this.addChatroomStore(chatroom)
+      })
     },
     methods: {
-      ...mapActions(['getChatroomsFromServer'])
+      ...mapActions({
+        getChatroomsFromServerStore: 'getChatroomsFromServer',
+        emitChatroomStore: 'emitChatroom',
+        addChatroomStore: 'addChatroom'
+      }),
+      addChatroom() {
+        this.emitChatroomStore(this.newChatroom)
+        this.newChatroom.name = ''
+      }
     }
   }
 </script>

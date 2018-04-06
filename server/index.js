@@ -26,6 +26,16 @@ io.on('connection', socket => {
     userName = name
   })
 
+  socket.on('newChatroom', chatroom => {
+    console.log('new chatroom : ' + chatroom.name)
+    if(!(chatroom.name in chatrooms)) {
+      chatrooms[chatroom.name] = chatroom
+      io.sockets.emit('newChatroom', chatroom)
+    } else {
+      console.log('chatroom rejected')
+    }
+  })
+
   socket.on('roomConnect', roomId => {
     console.log(userName + ' connected to room ' + roomId)
   })
