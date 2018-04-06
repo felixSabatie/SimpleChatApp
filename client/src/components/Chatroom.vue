@@ -13,9 +13,9 @@
     </div>
 
     <form class="message-form" v-on:submit.prevent="sendMessage">
-      <label for="message-input"></label>
-      <input id="message-input" type="text" v-model="currentMessage.content">
-      <button type="submit">Send</button>
+      <label class="f-label" for="message-input"></label>
+      <input class="f-input" id="message-input" type="text" v-model="currentMessage.content">
+      <button class="f-button" type="submit">Send</button>
     </form>
   </div>
 </template>

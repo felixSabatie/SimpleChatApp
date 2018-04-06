@@ -7,8 +7,8 @@
       </div>
       <div class="form">
         <form v-on:submit.prevent="addChatroom">
-          <input placeholder="New chatroom name" type="text" v-model="newChatroom.name">
-          <button type="submit">Create</button>
+          <input class="f-input" placeholder="New chatroom name" type="text" v-model="newChatroom.name">
+          <button class="f-button" type="submit">Create</button>
         </form>
       </div>
     </div>

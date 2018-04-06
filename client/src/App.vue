@@ -23,8 +23,8 @@
       font-size: 20px;
       font-weight: bold;
       color: #eee;
-      box-shadow: 0 2px 10px #181818;
-      background-color: #202930;
+      box-shadow: 0 2px 8px #181818;
+      background-color: #162228;
     }
 
     .content {
