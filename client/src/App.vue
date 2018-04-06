@@ -1,8 +1,12 @@
 <template>
   <div class="main">
-    <h1>Chat app</h1>
+    <nav>
+      <div class="brand">Chat app</div>
+    </nav>
 
-    <router-view></router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -11,3 +15,20 @@
     name: 'App',
   }
 </script>
+
+<style lang="scss">
+  .main {
+    nav {
+      padding: 10px 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #eee;
+      box-shadow: 0 2px 10px #181818;
+      background-color: #202930;
+    }
+
+    .content {
+      padding: 20px;
+    }
+  }
+</style>
