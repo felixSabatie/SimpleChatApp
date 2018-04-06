@@ -3,6 +3,8 @@ let app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
+let chatrooms = []
+let clients = []
 
 io.on('connection', socket => {
   console.log('user connected')

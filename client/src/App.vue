@@ -7,12 +7,7 @@
 </template>
 
 <script>
-  import Chatroom from './components/Chatroom'
-
   export default {
     name: 'App',
-    components: {
-      Chatroom
-    }
   }
 </script>

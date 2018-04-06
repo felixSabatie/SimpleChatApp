@@ -1,13 +1,14 @@
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Login from './components/Login'
-import Home from './components/Home'
+import Chatrooms from './components/Chatrooms'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/login', component: Login },
-  { path: '/home', component: Home },
+  { path: '/chatrooms', component: Chatrooms },
+  { path: '/chatrooms/:id', component: Chatrooms },
   { path: '/', redirect: '/login' }
 ]
 
