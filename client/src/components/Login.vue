@@ -27,11 +27,12 @@
       }
     },
     methods: {
-      ...mapActions(['connect']),
+      ...mapActions({
+        loginStore: 'login'
+      }),
 
       login() {
-        this.socket.emit('login', this.name)
-        this.connect()
+        this.loginStore({name: this.name})
         this.redirectToHome()
       },
 

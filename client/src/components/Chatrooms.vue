@@ -57,7 +57,6 @@
 
     watch: {
       '$route' (to, from) {
-        console.log('Route changed')
         this.setCurrentChatroom()
       }
     },

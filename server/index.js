@@ -39,19 +39,32 @@ io.on('connection', socket => {
     }
   })
 
-  socket.on('roomConnect', roomId => {
-    console.log(userName + ' connected to room ' + roomId)
-  })
-
   socket.on('messageSent', message => {
-    console.log('message received : ' + message)
-    io.sockets.emit('newMessage', message)
+    console.log('message received : ' + message.content)
+    chatroom = getChatroomById(message.chatroomId)
+    if(chatroom != null) {
+      chatroom.messages.push(message)
+      io.sockets.emit('newMessage', message)
+    }
   })
 
 })
 
+function getChatroomById(chatroomId) {
+  return chatrooms.find(room => room.id === chatroomId)
+}
+
 app.get('/chatrooms', (req, res) => {
   res.json(chatrooms)
+})
+
+app.get('/chatrooms/:id', (req, res) => {
+  let chatroom = getChatroomById(parseInt(req.params.id))
+  if(chatroom == null) {
+    res.status(404).send('Resource not found')
+  } else {
+    res.json(chatroom)
+  }
 })
 
 http.listen(3000)
