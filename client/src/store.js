@@ -51,7 +51,7 @@ const actions = {
     context.commit('addChatroom', chatroom)
   },
   login({commit, state}, user) {
-    state.socket.emit('login', this.name)
+    state.socket.emit('login', user.name)
     this.dispatch('connect')
     commit('login', user)
   },

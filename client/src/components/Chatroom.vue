@@ -5,12 +5,15 @@
     </div>
     <div class="bottom-part">
       <div class="messages">
-        <div class="message" v-for="message of chatroom.messages">
-          <div class="sender">
+        <div class="message" v-for="(message, index) in chatroom.messages"
+             v-bind:class="[ isCreator(message) ? 'is-creator' : 'is-not-creator' ]">
+          <div v-if="displaySender(index)" class="sender">
             {{ message.sender.name }}
           </div>
-          <div class="content">
-            {{ message.content }}
+          <div class="content-wrapper">
+            <div class="content">
+              {{ message.content }}
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +52,13 @@
       sendMessage() {
         this.socket.emit('messageSent', this.currentMessage)
         this.currentMessage.content = ''
+      },
+      isCreator(message) {
+        return this.user.name === message.sender.name
+      },
+      displaySender(index) {
+        return index === 0 ||
+          this.chatroom.messages[index - 1].sender.name !== this.chatroom.messages[index].sender.name
       }
     }
   }
@@ -75,6 +85,41 @@
 
       .messages {
         overflow: auto;
+        padding: 0 20px;
+
+        .message {
+          margin-top: 15px;
+
+          &.is-creator {
+            text-align: right;
+
+            .content {
+              background-color: #3498DB;
+            }
+          }
+
+          &.is-not-creator {
+            .content {
+              background-color: #336E7B;
+            }
+          }
+
+          .sender {
+            color: #aaa;
+            font-size: 13px;
+          }
+          .content-wrapper {
+            margin-top: 5px;
+
+            .content {
+              display: inline-block;
+              max-width: 70%;
+              padding: 5px 10px;
+              border-radius: 17px;
+              text-align: left;
+            }
+          }
+        }
       }
 
       .message-form form {

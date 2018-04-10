@@ -15,7 +15,7 @@
       },
       cutMessage() {
         let messageContent = this.getLastMessage().content
-        return this.cutString(messageContent, 15)
+        return this.cutString(messageContent, 20)
       }
     },
     methods: {
@@ -34,13 +34,18 @@
 
 <style lang="scss">
   .chatroom-item {
+    padding: 15px 10px;
+    border-bottom: 1px solid #364248;
+    cursor: pointer;
 
     .chatroom-name {
 
     }
 
     .last-message {
-
+      padding-left: 10px;
+      color: #aaa;
+      font-size: 13px;
     }
   }
 </style>
