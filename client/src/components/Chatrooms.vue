@@ -90,24 +90,34 @@
       height: 100%;
 
       .left-panel {
-        flex-basis: 30%;
+        flex-basis: 280px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        /*border-right: 1px solid black;*/
         box-shadow: 0 2px 8px #181818;
 
         .chatrooms-list {
           overflow: auto;
         }
 
-        .form {
+        .form form {
+          padding: 0 10px;
+          display: flex;
+          align-items: center;
+
+          .f-button {
+            flex-basis: 60px;
+          }
+
+          .f-input {
+            flex: 1;
+          }
         }
       }
 
       .right-panel {
-        flex-basis: 70%;
+        flex: 1;
         height: 100%;
       }
     }
