@@ -1,12 +1,6 @@
 <template>
   <div class="main">
-    <nav>
-      <div class="brand">Chat app</div>
-    </nav>
-
-    <div class="content">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -27,8 +21,5 @@
       background-color: #162228;
     }
 
-    .content {
-      padding: 20px;
-    }
   }
 </style>

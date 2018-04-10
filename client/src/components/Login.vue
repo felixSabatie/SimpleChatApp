@@ -50,7 +50,7 @@
     background-color: #162228;
     border-radius: 2px;
     box-shadow: 2px 4px 6px #181818;
-    margin: auto;
+    margin: 20px auto 0 auto;
     text-align: center;
 
     .f-input {

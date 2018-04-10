@@ -80,3 +80,37 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .main {
+    height: 100vh;
+
+    .chatrooms {
+      display: flex;
+      height: 100%;
+
+      .left-panel {
+        flex-basis: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /*border-right: 1px solid black;*/
+        box-shadow: 0 2px 8px #181818;
+
+        .chatrooms-list {
+          overflow: auto;
+        }
+
+        .form {
+        }
+      }
+
+      .right-panel {
+        flex-basis: 70%;
+        height: 100%;
+      }
+    }
+  }
+
+</style>
