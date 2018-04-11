@@ -2,11 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import IoClient from 'socket.io-client'
 import axios from 'axios'
+import parameters from './parameters'
 
 Vue.use(Vuex)
 
 const state = {
-  socket: IoClient('192.168.43.99:3000'),
+  socket: IoClient(parameters.serverUrl),
   connected: false,
   chatrooms: [],
   user: null
@@ -38,7 +39,7 @@ const actions = {
     context.commit('connect')
   },
   getChatroomsFromServer(context) {
-    axios.get('http://192.168.43.99:3000/chatrooms').then(response => {
+    axios.get(parameters.serverUrl + '/chatrooms').then(response => {
       context.commit('setChatrooms', response.data)
     }, err => {
       console.error(err)
